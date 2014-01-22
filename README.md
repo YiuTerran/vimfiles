@@ -20,5 +20,6 @@ __All belowed steps are checked just under Unbuntu 12.10 x64__
 cd ~/.vim/bundle/YouCompleteMe
 ./install.sh --clang-completer
 ```
-9. That's not all, but you can work with this vim
+9. if you want to use `Autoformat` plugin, remember to install `astyle`,`python-autopep8` and other packages it use.
+10. That's not all, but you can work with this vim
 

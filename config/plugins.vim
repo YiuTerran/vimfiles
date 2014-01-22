@@ -149,6 +149,8 @@ map <leader><space> :FixWhitespace<cr>
 "for auto format code
 Bundle "Chiel92/vim-autoformat"
 noremap <C-F8> :Autoformat<CR><CR>
+let g:formatprg_c = "astyle"
+let g:formatprg_args_c = "-A3"
 
 "##########语法检查##########"
 "Bundle 'scrooloose/syntastic'
