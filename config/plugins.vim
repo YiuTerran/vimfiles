@@ -45,6 +45,16 @@ let g:netrw_home='~/bak'
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+"for taglist
+Bundle 'taglist.vim'
+let Tlist_Show_One_File = 1            "只显示当前文件的taglist，默认是显示多个
+let Tlist_Auto_Open=1
+let Tlist_Exit_OnlyWindow = 1          "如果taglist是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist
+let Tlist_GainFocus_On_ToggleOpen = 0  "打开taglist时，光标保留在taglist窗口
+let Tlist_Ctags_Cmd='/usr/bin/ctags'  "设置ctags命令的位置
+nnoremap <leader>tl :Tlist<CR>
+
 "for bufexplorer
 Bundle 'vim-scripts/bufexplorer.zip'
 noremap <silent> <CR> :BufExplorer<CR>
@@ -99,6 +109,9 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 "定义存放代码片段的文件夹
 ".vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
+let g:UltiSnipsExpandTrigger="<c-k>" 
+let g:UltiSnipsJumpForwardTrigger="<c-k>" 
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 "快速 加减注释
 "shift+v+方向键选中(默认当前行),<leader>cc 加上注释<leader>cu 解开注释
