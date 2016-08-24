@@ -10,8 +10,6 @@
 "          nnoremap 在normal下生效
 "better command line editing
 "在命令行模式下使用了类似emace的快捷键
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
 "后退一个字符
 cnoremap <C-B>        <Left>
 " 删除光标所在的字符
@@ -34,10 +32,6 @@ nnoremap <C-l> <C-W>l
 noremap H 0
 noremap L $
 map 0 ^
-
-" speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
 
 "用F3 开启或关闭list功能，是否显示不可见字符
 set listchars=tab:>-,eol:$

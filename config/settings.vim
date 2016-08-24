@@ -16,11 +16,17 @@ set helplang=cn
 " 文件类型检测/允许加载文件类型插件/为不同类型的文件定义不同的缩进格式
 filetype plugin indent on
 
+"折叠
+set foldmethod=indent
+set foldlevelstart=99
+au BufWinLeave * silent mkview  " 保存文件的折叠状态
+au BufRead * silent loadview    " 恢复文件的折叠状态
+nnoremap <space> za             " 用空格来切换折叠状态
 
 " color scheme
 set background=dark
 set guifont=Monaco\ h9
-set cc=80
+set cc=79
 
 " 取消备份。
 set nobackup
@@ -64,5 +70,9 @@ set expandtab
 set smartindent
 set autoindent
 set softtabstop=4
+"自动去除多余空格
+autocmd FileType c,cpp,java,php,python,html,js,jsx autocmd BufWritePre <buffer> :%s/\s\+$//e
+"git commit msg 定位
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 set cino=:0g0t0(sus
