@@ -1,68 +1,45 @@
-"=============================================
-"Author:hominlinx
-"Version:1.1
-"Email:hominlinx@gmail.com
-"=============================================
-
-"Plugin settings
-
-" Plugin settings
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-  echo "Installing Vundle..."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-  let iCanHazVundle=0
-endif
+call plug#begin('~/.vim/plugged')
 
 set nocompatible "be iMproved
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Plugin 'gmarik/vundle'
 
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml', {'for': 'toml'}
 
 
 "主题：molokai
-Plugin 'tomasr/molokai'
+Plug 'tomasr/molokai'
 let g:molokai_original = 1
 let g:rehash256 = 1
 
-"主题 solarized
-Plugin 'altercation/vim-colors-solarized'
-"let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-
-Plugin 'mbbill/fencview'
+"字符编码自动识别
+Plug 'mbbill/fencview'
 
 "rust
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {'for': 'rs'}
 
 "emmet
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', {'for': ['xml', 'html', 'jsx']}
 
 "go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
 
 "NERD-Tree 建议记住该插件的快捷键
-Plugin 'vim-scripts/The-NERD-tree'
+Plug 'scrooloose/nerdtree'
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$' ]
 let g:netrw_home='~/bak'
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"自动打开nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " 这个插件可以显示文件的Git增删状态
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 "for tagbar
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <Leader>tb :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=30
@@ -83,14 +60,14 @@ let g:tagbar_type_rust = {
 
 
 "for bufexplorer
-Plugin 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/bufexplorer.zip'
 noremap <silent> <CR> :BufExplorer<CR>
 
 "自动补全单引号，双引号等
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 "文件搜索 建议学习一下
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 "set wildignore+=*/tmp/*,*.so,*.swp,*.zip " MacOSX/Linux"
@@ -107,22 +84,22 @@ let g:ctrlp_follow_symlinks=1
 
 
 "% 匹配成对的标签，跳转
-Plugin 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 "快速跳转标签
 "m(ark), dm, `(jump)
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 
 "根据字符快速跳转
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 "区块伸缩
-Plugin 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 
 "git
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --racer-completer'}
 "youcompleteme 默认tab s-tab 和自动补全冲突
 let g:ycm_key_list_select_completion=['<c-n>']
 let g:ycm_key_list_select_completion = ['<Down>']
@@ -138,26 +115,28 @@ let g:ycm_autoclose_preview_window_after_insertion=1
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
-"快速插入代码片段
-Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"定义存放代码片段的文件夹
-".vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
-let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+" Track the engine.
+Plug 'SirVer/ultisnips'
 
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "快速 加减注释
 "shift+v+方向键选中(默认当前行),<leader>cc 加上注释<leader>cu 解开注释
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 "python fold
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold', {'for': 'py'}
 
 "状态栏增强展示
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " --- vim-airline
 set ttimeoutlen=50
 let g:airline_left_sep = ''
@@ -192,17 +171,17 @@ endfunction
 
 
 "for show no user whitespaces
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 map <leader><space> :FixWhitespace<cr>
 
 "for auto format code
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 noremap <C-F8> :Autoformat<CR><CR>
 let g:formatprg_c = "astyle"
 let g:formatprg_args_c = "-A3"
 
 "##########语法检查##########"
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_check_on_open=0 "在打开文件的时候检查
@@ -214,14 +193,14 @@ let g:syntastic_mode_map      = {'mode': 'active',
             \}
 
 " Airline output for tmux
-Plugin 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=0
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_preset = 'full'
 
 "括号显示增强
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
     \ ['brown', 'RoyalBlue3'],
     \ ['Darkblue', 'SeaGreen3'],
@@ -243,17 +222,4 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 40
 let g:rbpt_loadcmd_toggle = 0
 
-" Brief help
-" :PluginList - list configured bundles
-" :PluginInstall(!) - install(update) bundles
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!) - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin command are not allowed..
-
-if iCanHazVundle == 0
-  echo "Installing Plugins, please ignore key map error messages"
-  echo ""
-  :PluginInstall
-endif
+call plug#end()

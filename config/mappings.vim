@@ -1,9 +1,3 @@
-"=============================================
-"Author:hominlinx
-"Version:1.1
-"Email:hominlinx@gmail.com
-"=============================================
-
 "按键映射：cnoremap 在命令行中非递归键盘映射
 "          inoremap 在插入模式下生效
 "          vnoremap 在visual下生效

@@ -6,8 +6,8 @@
 
 let mapleader = ","
 
-source ~/Dropbox/vim/config/plugins.vim
-source ~/Dropbox/vim/config/settings.vim
-source ~/Dropbox/vim/config/snippets.vim
-source ~/Dropbox/vim/config/mappings.vim
+source config/plugins.vim
+source config/settings.vim
+source config/snippets.vim
+source config/mappings.vim
 

@@ -1,9 +1,3 @@
-"=============================================
-"Author:hominlinx
-"Version:1.1
-"Email:hominlinx@gmail.com
-"=============================================
-
 set encoding=utf-8
 
 "开启语法高亮
