@@ -6,8 +6,7 @@
 
 let mapleader = ","
 
-source config/plugins.vim
-source config/settings.vim
-source config/snippets.vim
-source config/mappings.vim
-
+source ~/.vim/config/plugins.vim
+source ~/.vim/config/settings.vim
+source ~/.vim/config/snippets.vim
+source ~/.vim/config/mappings.vim

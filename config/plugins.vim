@@ -5,23 +5,13 @@ filetype off
 
 Plug 'cespare/vim-toml', {'for': 'toml'}
 
-
-"主题：molokai
-Plug 'tomasr/molokai'
-let g:molokai_original = 1
-let g:rehash256 = 1
+Plug 'NLKNguyen/papercolor-theme'
 
 "字符编码自动识别
 Plug 'mbbill/fencview'
 
-"rust
-Plug 'rust-lang/rust.vim', {'for': 'rs'}
-
 "emmet
 Plug 'mattn/emmet-vim', {'for': ['xml', 'html', 'jsx']}
-
-"go
-Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
 
 "NERD-Tree 建议记住该插件的快捷键
 Plug 'scrooloose/nerdtree'
@@ -38,10 +28,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " 这个插件可以显示文件的Git增删状态
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" vue语法
+Plug 'posva/vim-vue'
+
 "for tagbar
 Plug 'majutsushi/tagbar'
 nmap <Leader>tb :TagbarToggle<CR>
-let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=30
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 let g:tagbar_type_rust = {
@@ -99,35 +92,6 @@ Plug 'terryma/vim-expand-region'
 "git
 Plug 'tpope/vim-fugitive'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --racer-completer'}
-"youcompleteme 默认tab s-tab 和自动补全冲突
-let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_autoclose_preview_window_after_insertion=1
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-
-" Track the engine.
-Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 "快速 加减注释
 "shift+v+方向键选中(默认当前行),<leader>cc 加上注释<leader>cu 解开注释
 Plug 'scrooloose/nerdcommenter'
@@ -135,40 +99,37 @@ Plug 'scrooloose/nerdcommenter'
 "python fold
 Plug 'tmhedberg/SimpylFold', {'for': 'py'}
 
-"状态栏增强展示
-Plug 'bling/vim-airline'
-" --- vim-airline
-set ttimeoutlen=50
-let g:airline_left_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#csv#enabled = 0
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#virtualenv#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme_patch_func = 'AirlineThemePatch'
+"替换airline
+Plug 'itchyny/lightline.vim'
+let g:lightline = { 'colorscheme': 'PaperColor' }
 
-function! AirlineInit()
-    let g:airline_section_y = airline#section#create_right(['%v', '%l'])
-    let g:airline_section_z = airline#section#create_right(['%P', '%L'])
-endfunction
-autocmd VimEnter * call AirlineInit()
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+set completeopt=menu,menuone
 
-function! AirlineThemePatch(palette)
-    if g:airline_theme == "wombat"
-        for colors in values(a:palette.inactive)
-            let colors[3] = 235
-        endfor
-    endif
-endfunction
+noremap <c-z> <NOP>
 
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
+let g:ycm_filetype_whitelist = {
+			\ "c":1,
+			\ "cpp":1,
+			\ "objc":1,
+            \ "js":1,
+            \ "go":1,
+            \ "java":1,
+            \ "py":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ }
 
 "for show no user whitespaces
 Plug 'bronson/vim-trailing-whitespace'
@@ -191,13 +152,6 @@ let g:syntastic_mode_map      = {'mode': 'active',
             \'active_filetypes':  ['py','pyx','h','c','cpp','cc'],
             \'passive_filetypes': ['html', 'css', 'xhtml', 'eruby']
             \}
-
-" Airline output for tmux
-Plug 'edkolev/tmuxline.vim'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=0
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_preset = 'full'
 
 "括号显示增强
 Plug 'kien/rainbow_parentheses.vim'

@@ -18,8 +18,7 @@ au BufRead * silent loadview    " 恢复文件的折叠状态
 nnoremap <space> za             " 用空格来切换折叠状态
 
 " color scheme
-set background=dark
-set guifont=Monaco\ h9
+set guifont=Monaco:h11
 set cc=79
 
 " 取消备份。
@@ -64,6 +63,7 @@ set expandtab
 set smartindent
 set autoindent
 set softtabstop=4
+set clipboard=unnamed
 "自动去除多余空格
 autocmd FileType c,cpp,java,php,python,html,js,jsx autocmd BufWritePre <buffer> :%s/\s\+$//e
 "git commit msg 定位

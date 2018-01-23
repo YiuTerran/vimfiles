@@ -1,10 +1,8 @@
 " 修改主题和颜色展示
-colorscheme molokai
-set background=dark
+" light theme
 set t_Co=256
-"colorscheme solarized
-"set background=dark
-"set t_Co=256
+set background=light
+colorscheme PaperColor
 
 "设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn LineNr
