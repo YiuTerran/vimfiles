@@ -95,15 +95,17 @@ let g:formatprg_c = "astyle"
 let g:formatprg_args_c = "-A3"
 
 "##########语法检查##########"
-Plug 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+Plug 'w0rp/ale'
+let g:ale_sign_column_always = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"自动补全
+Plug 'maralla/completor.vim'
+
+"class文件自动反编译
+Plug 'JavaDecompiler.vim'
+
+"快速注释
+Plug 'scrooloose/nerdcommenter'
 
 "括号显示增强
 Plug 'kien/rainbow_parentheses.vim'

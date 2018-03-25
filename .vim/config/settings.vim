@@ -18,7 +18,7 @@ au BufRead * silent loadview    " 恢复文件的折叠状态
 nnoremap <space> za             " 用空格来切换折叠状态
 
 " color scheme
-set guifont=Monaco:h11
+set guifont=Monaco:h14
 set cc=79
 
 " 取消备份。
