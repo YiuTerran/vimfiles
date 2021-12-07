@@ -47,26 +47,11 @@ noremap <silent> <CR> :BufExplorer<CR>
 Plug 'jiangmiao/auto-pairs'
 
 "文件搜索 建议学习一下
-Plug 'kien/ctrlp.vim'
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
-    \ }
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-
-"全局搜索
-Plug 'dyng/ctrlsf.vim'
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_auto_close = 0
-nnoremap <Leader>f :CtrlSF<CR>
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_WorkingDirectoryMode = 'AF'
+let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
+let g:Lf_DefaultExternalTool='rg'
 
 "% 匹配成对的，跳转
 Plug 'vim-scripts/matchit.zip'
@@ -84,6 +69,10 @@ Plug 'tmhedberg/SimpylFold', {'for': 'py'}
 Plug 'itchyny/lightline.vim'
 let g:lightline = { 'colorscheme': 'PaperColor' }
 
+Plug 'autowitch/hive.vim'
+au BufNewFile,BufRead *.hql set filetype=hive expandtab
+au BufNewFile,BufRead *.q set filetype=hive expandtab
+
 "for show no user whitespaces
 Plug 'bronson/vim-trailing-whitespace'
 map <leader><space> :FixWhitespace<cr>
@@ -99,7 +88,7 @@ Plug 'w0rp/ale'
 let g:ale_sign_column_always = 1
 
 "自动补全
-Plug 'maralla/completor.vim'
+Plug 'ackyshake/VimCompletesMe'
 
 "class文件自动反编译
 Plug 'JavaDecompiler.vim'
