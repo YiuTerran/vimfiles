@@ -90,9 +90,6 @@ let g:ale_sign_column_always = 1
 "自动补全
 Plug 'ackyshake/VimCompletesMe'
 
-"class文件自动反编译
-Plug 'JavaDecompiler.vim'
-
 "快速注释
 Plug 'scrooloose/nerdcommenter'
 
